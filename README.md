@@ -18,7 +18,7 @@
 ### Association
 
 - has_many :furimas
-- has_many :purchase
+- has_many :purchases
 
 ## furimas テーブル
 
@@ -39,7 +39,7 @@
 - belongs_to :user
 - has_one :purchase
 
-## purchase テーブル
+## purchases テーブル
 
 | user        | references | null: false, foreign_key: true |
 | furima      | references | null: false, foreign_key: true |
