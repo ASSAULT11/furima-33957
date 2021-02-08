@@ -18,50 +18,50 @@
 ### Association
 
 - has_many :furimas
-- belongs_to :buy_id
+- has_many :purchase
 
 ## furimas テーブル
 
-| Column      | Type       | Options     |
-| ----------- | ---------- | ----------- |
-| item        | text       | null: false |
-| text        | text       | null: false |
-| category_id | integer    | null: false |
-| state_id    | integer    | null: false |
-| shipping_id | integer    | null: false |
-| area_id     | integer    | null: false |
-| send_day_id | integer    | null: false |
-| price       | integer    | null: false |
-| user        | references |             |
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| item        | text       | null: false                    |
+| text        | text       | null: false                    |
+| category_id | integer    | null: false                    |
+| state_id    | integer    | null: false                    |
+| shipping_id | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| send_day_id | integer    | null: false                    |
+| price       | integer    | null: false                    |
+| user        | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :buy_id
+- has_one :purchase
 
-## buy_ids テーブル
+## purchase テーブル
 
-| user        | references |             |
-| furima      | references |             |
+| user        | references | null: false, foreign_key: true |
+| furima      | references | null: false, foreign_key: true |
 
 ### Association
 
-- has_one :user
-- has_one :furima
-- belongs_to :buy
+- belongs_to :user
+- belongs_to :furima
+- has_one :buy
 
 ## buys テーブル
 
-| Column      | Type       | Options     |
-| ----------- | ---------- | ----------- |
-| postal_code | string     | null: false |
-| prefectures | string     | null: false |
-| city        | string     | null: false |
-| address     | string     | null: false |
-| building    | string     |             |
-| phone       | integer    | null: false |
-| buy_id      | references |             |
+| Column         | Type       | Options                   |
+| -------------- | ---------- | ------------------------- |
+| postal_code    | string     | null: false               |
+| prefectures_id | integer    | null: false               |
+| city           | string     | null: false               |
+| address        | string     | null: false               |
+| building       | string     |                           |
+| phone          | string     | null: false               |
+| purchase       | references | null: false, unique: true |
 
 ### Association
 
-- has_one :buy_id
+- belongs_to :purchase
