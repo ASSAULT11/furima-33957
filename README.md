@@ -1,24 +1,67 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column               | Type       | Options     |
+| -------------------- | ---------- | ----------- |
+| nickname             | string     | null: false |
+| email                | string     | null: false |
+| encrypted_password   | string     | null: false |
+| last_name            | string     | null: false |
+| first_name           | string     | null: false |
+| kana_last            | string     | null: false |
+| kana_first           | string     | null: false |
+| birthday             | data       | null: false |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :furimas
+- has_many :purchases
 
-* Database creation
+## furimas テーブル
 
-* Database initialization
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| item        | text       | null: false                    |
+| text        | text       | null: false                    |
+| category_id | integer    | null: false                    |
+| state_id    | integer    | null: false                    |
+| shipping_id | integer    | null: false                    |
+| area_id     | integer    | null: false                    |
+| send_day_id | integer    | null: false                    |
+| price       | integer    | null: false                    |
+| user        | references | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- has_one :purchase
 
-* Deployment instructions
+## purchases テーブル
 
-* ...
+| user        | references | null: false, foreign_key: true |
+| furima      | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :furima
+- has_one :buy
+
+## buys テーブル
+
+| Column         | Type       | Options                   |
+| -------------- | ---------- | ------------------------- |
+| postal_code    | string     | null: false               |
+| prefectures_id | integer    | null: false               |
+| city           | string     | null: false               |
+| address        | string     | null: false               |
+| building       | string     |                           |
+| phone          | string     | null: false               |
+| purchase       | references | null: false, unique: true |
+
+### Association
+
+- belongs_to :purchase
