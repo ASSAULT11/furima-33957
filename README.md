@@ -4,41 +4,37 @@
 
 ## users テーブル
 
-| Column     | Type       | Options     |
-| ---------- | ---------- | ----------- |
-| nickname   | string     | null: false |
-| email      | string     | null: false |
-| password   | string     | null: false |
-| name       | string     | null: false |
-| kana_name  | string     | null: false |
-| year       | data       | null: false |
-| month      | data       | null: false |
-| day        | data       | null: false |
-| buy        | references |             |
+| Column               | Type       | Options     |
+| -------------------- | ---------- | ----------- |
+| nickname             | string     | null: false |
+| email                | string     | null: false |
+| encrypted_password   | string     | null: false |
+| name                 | string     | null: false |
+| kana_name            | string     | null: false |
+| birthday             | data       | null: false |
 
 ### Association
 
 - has_many :furimas
-- belongs_to :buy
+- has_one :buy
 
 ## furimas テーブル
 
-| Column     | Type       | Options     |
-| ---------- | ---------- | ----------- |
-| image      |            |             |
-| item       | text       | null: false |
-| text       | text       | null: false |
-| category   | string     | null: false |
-| state      | string     | null: false |
-| shipping   | string     | null: false |
-| area       | string     | null: false |
-| send_day   | string     | null: false |
-| price      | integer    | null: false |
-| user       | references |             |
+| Column      | Type       | Options     |
+| ----------- | ---------- | ----------- |
+| item        | text       | null: false |
+| text        | text       | null: false |
+| category_id | integer    | null: false |
+| state_id    | integer    | null: false |
+| shipping_id | integer    | null: false |
+| area_id     | integer    | null: false |
+| send_day_id | integer    | null: false |
+| price       | integer    | null: false |
+| user        | references |             |
 
 ### Association
 
-- has_many :buys
+- has_one :buy
 - belongs_to :user
 
 ## buys テーブル
