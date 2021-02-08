@@ -9,14 +9,16 @@
 | nickname             | string     | null: false |
 | email                | string     | null: false |
 | encrypted_password   | string     | null: false |
-| name                 | string     | null: false |
-| kana_name            | string     | null: false |
+| last_name            | string     | null: false |
+| first_name           | string     | null: false |
+| kana_last            | string     | null: false |
+| kana_first           | string     | null: false |
 | birthday             | data       | null: false |
 
 ### Association
 
 - has_many :furimas
-- has_one :buy
+- belongs_to :buy_id
 
 ## furimas テーブル
 
@@ -34,8 +36,19 @@
 
 ### Association
 
-- has_one :buy
 - belongs_to :user
+- belongs_to :buy_id
+
+## buy_ids テーブル
+
+| user        | references |             |
+| furima      | references |             |
+
+### Association
+
+- has_one :user
+- has_one :furima
+- belongs_to :buy
 
 ## buys テーブル
 
@@ -47,10 +60,8 @@
 | address     | string     | null: false |
 | building    | string     |             |
 | phone       | integer    | null: false |
-| user        | references |             |
-| furima      | references |             |
+| buy_id      | references |             |
 
 ### Association
 
-- has_one :user
-- has_one :furima
+- has_one :buy_id
