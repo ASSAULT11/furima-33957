@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :furimas
+
   with_options presence: true do
     validates :nickname
     validates :birthday
