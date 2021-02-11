@@ -38,6 +38,12 @@ require 'rails_helper'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
      end
+     it "passwordとpassword_confirmationの値が一致していない場合、登録できない" do
+      @user.password = '1234asd' 
+      @user.password_confirmation = '5678asd' 
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+     end
      it "passwordが６文字以上でないと登録できない" do
       @user.password = '123qw' 
       @user.valid?
