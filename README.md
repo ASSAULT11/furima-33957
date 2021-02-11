@@ -13,7 +13,7 @@
 | first_name           | string     | null: false |
 | kana_last            | string     | null: false |
 | kana_first           | string     | null: false |
-| birthday             | data       | null: false |
+| birthday             | date       | null: false |
 
 ### Association
 
