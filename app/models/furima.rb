@@ -17,8 +17,8 @@ class Furima < ApplicationRecord
   end
 
   validates :category_id, numericality: { other_than: 1 } 
-  validates :state_id, numericality: { other_than: 1 } 
+  validates :state_id,    numericality: { other_than: 1 } 
   validates :shipping_id, numericality: { other_than: 1 } 
-  validates :area_id, numericality: { other_than: 1 } 
+  validates :area_id,     numericality: { other_than: 1 } 
   validates :send_day_id, numericality: { other_than: 1 } 
 end
