@@ -11,6 +11,7 @@ class Furima < ApplicationRecord
 
 
   with_options presence: true do
+    validates :image
     validates :item
     validates :text
     validates :price
