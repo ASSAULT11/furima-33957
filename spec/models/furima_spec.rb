@@ -11,15 +11,15 @@ require 'rails_helper'
         expect(@furima).to be_valid
         end
         it "priceが300円なら出品できる" do
-          @furima.price = '300'
+          @furima.price = 300
           expect(@furima).to be_valid
         end
         it "priceが9,999,999円なら出品できる" do
-          @furima.price = '9999999'
+          @furima.price = 9999999
           expect(@furima).to be_valid
         end
-        it "priceが半角なら出品できる" do
-          @furima.price = '1000'
+        it "priceが半角数字のみなら出品できる" do
+          @furima.price = 1000
           expect(@furima).to be_valid
         end
       end
@@ -40,27 +40,27 @@ require 'rails_helper'
           expect(@furima.errors.full_messages).to include("Text can't be blank")
         end
         it "category_idが1では登録できない" do
-          @furima.category_id = '1' 
+          @furima.category_id = 1
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Category must be other than 1")
         end
         it "state_idが1では登録できない" do
-          @furima.state_id = '1' 
+          @furima.state_id = 1
           @furima.valid?
           expect(@furima.errors.full_messages).to include("State must be other than 1")
         end
         it "shipping_idが1では登録できない" do
-          @furima.shipping_id = '1' 
+          @furima.shipping_id = 1
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Shipping must be other than 1")
         end
         it "area_idが1では登録できない" do
-          @furima.area_id = '1' 
+          @furima.area_id = 1
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Area must be other than 1")
         end
         it "send_day_idが1では登録できない" do
-          @furima.send_day_id = '1' 
+          @furima.send_day_id = 1
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Send day must be other than 1")
         end
@@ -70,19 +70,29 @@ require 'rails_helper'
           expect(@furima.errors.full_messages).to include("Price can't be blank")
         end
         it "priceが全角では登録できない" do
-          @furima.price = '１０００' 
+          @furima.price = '１０００'
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Price is not included in the list")
         end
         it "priceが300以下では登録できない" do
-          @furima.price = '299' 
+          @furima.price = 299
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Price is not included in the list")
         end
         it "priceが9,999,999以上では登録できない" do
-          @furima.price = '19999999' 
+          @furima.price = 19999999
           @furima.valid?
           expect(@furima.errors.full_messages).to include("Price is not included in the list")
+        end
+        it "priceが半角英字では登録できない" do
+          @furima.price = 'asd'
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Price is not a number")
+        end
+        it "priceが半角英字と数字混合では登録できない" do
+          @furima.price = '1200asd'
+          @furima.valid?
+          expect(@furima.errors.full_messages).to include("Price is not a number")
         end
       end
     end
