@@ -9,7 +9,7 @@ class Furima < ApplicationRecord
   belongs_to :area
   belongs_to :send_day
 
-  
+
   with_options presence: true do
     validates :image
     validates :item
