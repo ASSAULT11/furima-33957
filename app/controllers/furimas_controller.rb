@@ -18,9 +18,9 @@ class FurimasController < ApplicationController
     end
   end
 
-  #def show ＊今後実装
-    #@furima = Furima.find(params[:id])
-  #end
+  def show
+    @furima = Furima.find(params[:id])
+  end
 
   private
   def furima_params
