@@ -2,8 +2,8 @@ class FurimasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index,]
 
   def index
-    #@furimas = Furima.all   ＊後の実装
-    #@furimas = Furima.order("created_at DESC")
+    @furimas = Furima.all
+    @furimas = Furima.order("created_at DESC")
   end
 
   def new
@@ -17,6 +17,10 @@ class FurimasController < ApplicationController
     else
       render "new"
     end
+  end
+
+  def show
+    @furima = Furima.find(params[:id])
   end
 
   private
