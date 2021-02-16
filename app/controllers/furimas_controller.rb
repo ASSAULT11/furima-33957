@@ -1,5 +1,7 @@
 class FurimasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index,]
+  before_action :move_to_index, only: [:edit, :update]#今後実装, :destroy
+  before_action :set_furima, only: [:show, :edit, :update]
 
   def index
     @furimas = Furima.all.order("created_at DESC")
@@ -19,7 +21,17 @@ class FurimasController < ApplicationController
   end
 
   def show
-    @furima = Furima.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @furima.update(furima_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
@@ -27,10 +39,16 @@ class FurimasController < ApplicationController
     params.require(:furima).permit(:item, :image, :text, :category_id, :state_id, :shipping_id, :area_id, :send_day_id, :price).merge(user_id: current_user.id)
   end
 
-  #def move_to_index  ＊今後実装
-    #@furima = Furima.find(params[:id])
-    #unless furima.user_id == current_user.id
-      #redirect_to action: :index
-    #end
-  #end
+
+  def move_to_index
+    @furima = Furima.find(params[:id])
+    unless @furima.user_id == current_user.id
+      redirect_to action: :index
+    end
+  end
+
+  def set_furima
+    @furima = Furima.find(params[:id])
+  end
+
 end
