@@ -41,12 +41,12 @@ class FurimasController < ApplicationController
     params.require(:furima).permit(:item, :image, :text, :category_id, :state_id, :shipping_id, :area_id, :send_day_id, :price).merge(user_id: current_user.id)
   end
 
-  #なくても良さそう？
+
   def move_to_index
     @furima = Furima.find(params[:id])
     unless @furima.user_id == current_user.id
       redirect_to action: :index
     end
   end
-  #/なくても良さそう
+
 end
