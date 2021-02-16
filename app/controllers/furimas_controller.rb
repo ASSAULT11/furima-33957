@@ -1,5 +1,5 @@
 class FurimasController < ApplicationController
-  before_action :authenticate_user!, except: [:show, :index,]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_furima, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
@@ -38,7 +38,7 @@ class FurimasController < ApplicationController
     if @furima.destroy
       redirect_to root_path
     else
-      render :destroy
+      render :show
     end
   end
 
