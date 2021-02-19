@@ -9,6 +9,7 @@ class PurchaseBuy
     validates :phone
     validates :user_id
     validates :furima_id
+    validates :token
   end
 
   validates :prefecture, numericality: { other_than: 1 }
