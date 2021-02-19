@@ -1,9 +1,6 @@
-class PurchaseBuy < ApplicationRecord
+class PurchaseBuy
   include ActiveModel::Model
   attr_accessor :furima_id, :user_id, :postal_code, :prefecture, :city, :address, :building, :phone
-
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :prefecture
 
   with_options presence: true do
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
@@ -14,7 +11,7 @@ class PurchaseBuy < ApplicationRecord
     validates :furima_id
   end
 
-  validates :prefectures_id, numericality: { other_than: 1 }
+  validates :prefecture, numericality: { other_than: 1 }
 
   def save
     purchase = Purchase.create(furima: furima_id, user_id: user_id)

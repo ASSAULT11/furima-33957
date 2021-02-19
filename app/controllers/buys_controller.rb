@@ -1,6 +1,7 @@
 class BuysController < ApplicationController
 
   def index
+    @furima = Furima.find(params[:furima_id])
     @purchase_buy = PurchaseBuy.new
   end
 

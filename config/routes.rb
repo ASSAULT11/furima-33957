@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'furimas/index'
   root to: "furimas#index"
-  resources :furimas
-  resources :buys, only:[:index,:create]
+  resources :furimas do
+    resources :buys, only:[:index,:create]
+  end
 end
