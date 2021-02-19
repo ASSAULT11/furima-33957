@@ -2,11 +2,16 @@ class PurchaseBuy < ApplicationRecord
   include ActiveModel::Model
   attr_accessor :furima_id, :user_id, :postal_code, :prefecture, :city, :address, :building, :phone
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :prefecture
+
   with_options presence: true do
-    validates :postal_code
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :city
     validates :address
     validates :phone
+    validates :user_id
+    validates :furima_id
   end
 
   validates :prefectures_id, numericality: { other_than: 1 }

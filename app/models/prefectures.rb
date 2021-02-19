@@ -51,6 +51,6 @@ class Prefectures < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :buys
+  has_many :purchase_buys
 
 end
