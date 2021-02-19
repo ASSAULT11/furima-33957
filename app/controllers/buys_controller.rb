@@ -6,6 +6,7 @@ class BuysController < ApplicationController
   end
 
   def create
+    @furima = Furima.find(params[:furima_id])
     @purchase_buy = PurchaseBuy.new(purchase_params)
     if @purchase_buy.valid?
       pay_item
