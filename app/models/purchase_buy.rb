@@ -13,7 +13,7 @@ class PurchaseBuy
   validates :prefecture_id, numericality: { other_than: 1 }
 
   def save
-    purchase = Purchase.create(furima: furima_id, user_id: user_id)
-    Buy.create(postal_code: postal_code, prefecture_id: prefecture.id,city: city, address: address, building: building, phone: phone,purchase_id: purchase.id)
+    purchase = Purchase.create(furima_id: furima_id, user_id: user_id)
+    Buy.create(postal_code: postal_code, prefectures_id: prefecture_id,city: city, address: address, building: building, phone: phone, purchase_id: purchase.id)
   end
 end
