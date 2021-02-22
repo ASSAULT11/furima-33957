@@ -40,6 +40,16 @@ require 'rails_helper'
       @purchase_buy.valid?
       expect(@purchase_buy.errors.full_messages).to include("Address can't be blank")
      end
+     it "phoneが12桁以上では登録できない" do
+      @purchase_buy.phone = '111111111111'
+      @purchase_buy.valid?
+      expect(@purchase_buy.errors.full_messages).to include("Phone is too long (maximum is 11 characters)")
+     end
+     it "phoneが英数字混合では登録できない" do
+      @purchase_buy.phone = 'aaa1111a111' 
+      @purchase_buy.valid?
+      expect(@purchase_buy.errors.full_messages).to include("Phone is invalid")
+     end
      it "phoneが空だと登録できない" do
       @purchase_buy.phone = '' 
       @purchase_buy.valid?
@@ -49,6 +59,16 @@ require 'rails_helper'
       @purchase_buy.token = '' 
       @purchase_buy.valid?
       expect(@purchase_buy.errors.full_messages).to include("Token can't be blank")
+     end
+     it "user_idが空だと登録できない" do
+      @purchase_buy.user_id = ''
+      @purchase_buy.valid?
+      expect(@purchase_buy.errors.full_messages).to include("User can't be blank")
+     end
+     it "furima_idが空だと登録できない" do
+      @purchase_buy.furima_id = ''
+      @purchase_buy.valid?
+      expect(@purchase_buy.errors.full_messages).to include("Furima can't be blank")
      end
     end
   end

@@ -1,5 +1,5 @@
 class BuysController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_furima, only: [:index, :create]
   before_action :move_to_index, only: [:index]
 
@@ -21,7 +21,7 @@ class BuysController < ApplicationController
   private
 
   def purchase_params
-    params.require(:purchase_buy).permit(:postal_code, :prefecture_id, :city, :address, :phone).merge(user_id: current_user.id,furima_id: params[:furima_id], token: params[:token])
+    params.require(:purchase_buy).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone).merge(user_id: current_user.id,furima_id: params[:furima_id], token: params[:token])
   end
 
   def pay_item
