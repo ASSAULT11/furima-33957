@@ -7,8 +7,6 @@ class PurchaseBuy
     validates :city
     validates :address
     validates :phone
-    validates :user_id
-    validates :furima_id
     validates :token
   end
 
