@@ -2,6 +2,7 @@ class BuysController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_furima, only: [:index, :create]
   before_action :move_to_index, only: [:index]
+  before_action :out_to_index, only: [:index]
 
   def index
     @purchase_buy = PurchaseBuy.new
@@ -39,6 +40,12 @@ class BuysController < ApplicationController
 
   def move_to_index
     if @furima.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
+
+  def out_to_index
+    if @furima.purchase.present?
       redirect_to root_path
     end
   end

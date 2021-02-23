@@ -1,7 +1,10 @@
 require 'rails_helper'
  RSpec.describe PurchaseBuy, type: :model do
   before do
-    @purchase_buy = FactoryBot.build(:purchase_buy)
+    @user = FactoryBot.create(:user, email: 'ddd@gmail.com' )
+    @furima = FactoryBot.create(:furima)
+    @purchase_buy = FactoryBot.build(:purchase_buy, user_id: @user.id, furima_id: @furima.id)
+    sleep(1)
   end
 
    describe "商品購入" do
