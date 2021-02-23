@@ -2,6 +2,7 @@ class FurimasController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_furima, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :out_to_index, only: [:edit, :update, :destroy]
 
   def index
     @furimas = Furima.all.order("created_at DESC")
@@ -54,6 +55,12 @@ class FurimasController < ApplicationController
   def move_to_index
     unless @furima.user_id == current_user.id
       redirect_to action: :index
+    end
+  end
+
+  def out_to_index
+    if @furima.purchase.present?
+      redirect_to root_path
     end
   end
 
